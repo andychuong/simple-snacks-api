@@ -2,7 +2,7 @@
 
 Simple snacks RESTful API created with Node.js and Express using the MVC architecture.
 
-Routes might look like:
+Routes:
 
 * GET /snacks
 * GET /snacks/:id
