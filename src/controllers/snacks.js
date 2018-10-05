@@ -39,4 +39,13 @@ function updateSnack (req, res, next) {
   res.json({ data: data.snack})
 }
 
-module.exports = {createSnack, getAll, getOneSnack, updateSnack}
+function deleteSnack (req, res, next) {
+  console.log('inside deleteSnack')
+  const data = model.deleteSnack(req.params.id)
+  if(data.error){
+    return next({ status:404, message: data.error})
+  }
+  res.json({ data: data.snack})
+}
+
+module.exports = {createSnack, getAll, getOneSnack, updateSnack, deleteSnack}

@@ -39,7 +39,7 @@ function getOneSnack (id) {
   return response
 }
 
-// Edit A Snacks
+// Update A Snack
 function updateSnack (id, body) {
   let error = {}
   const snack = snacks.find(snack => snack.id === id)
@@ -62,4 +62,20 @@ function updateSnack (id, body) {
   return response
 }
 
-module.exports = {create, getAll, getOneSnack, updateSnack}
+// Delete A Snack
+function deleteSnack (id) {
+  let error = {}
+  const snack = snacks.find(snack=> snack.id === id)
+  const snackIndex = snacks.indexOf(snack)
+  if (!snack) {
+    error.message = `Could not find snack with id of ${id}`
+    error.status = 404
+    response = { error }
+  } else {
+    snacks.splice(snackIndex,1)
+    response = { snack }
+  }
+  return response
+}
+
+module.exports = {create, getAll, getOneSnack, updateSnack, deleteSnack}

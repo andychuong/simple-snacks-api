@@ -9,6 +9,6 @@ router.get('/:id', control.getOneSnack)
 //http  --json POST http://localhost:3000/snacks name=Chips+Ahoy
 router.post('/', control.createSnack)
 router.put('/:id', control.updateSnack)
-// router.delete('/:id', control.deleteSnack)
+router.delete('/:id', control.deleteSnack)
 
 module.exports = router
