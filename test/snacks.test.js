@@ -16,7 +16,6 @@ describe('snacks Resources', function () {
           expect(res.body.data).to.be.an('object')
           expect(res.body.data.id).to.be.ok
           expect(res.body.data.name).to.equal(snack.name)
-          expect(res.body.data.breed).to.equal(snack.breed)
           done()
         })
     })
@@ -103,7 +102,6 @@ describe('snacks Resources', function () {
               expect(res.body.data).to.be.an('object')
               expect(res.body.data.id).to.be.ok
               expect(res.body.data.name).to.equal(newInfo.name)
-              expect(res.body.data.breed).to.equal(newInfo.breed)
               done()
             })
         })
@@ -131,26 +129,6 @@ describe('snacks Resources', function () {
         })
     })
 
-    it('should return an error if breed is missing', function (done) {
-      chai.request(app)
-        .get('/snacks')
-        .end((err, res) => {
-          expect(res.status).to.equal(200)
-          expect(res.body.data).to.be.an('array')
-
-          const snack = res.body.data[0]
-          const newInfo = { name: 'Tangerines' }
-          chai.request(app)
-            .put(`/snacks/${snack.id}`)
-            .send(newInfo)
-            .end((err, res) => {
-              expect(res.status).to.equal(400)
-              expect(res.body.error).to.be.an('object')
-              expect(res.body.error.message).to.be.ok
-              done()
-            })
-        })
-    })
   })
 
   describe('DELETE /:id', function () {
