@@ -4,6 +4,7 @@ const snacks = []
 
 // Create Snack!
 function create (body) {
+
   const errors = []
   const name = body.name
   let response
@@ -14,9 +15,8 @@ function create (body) {
   } else {
     const newSnack = { id: uuid(), name}
     snacks.push(newSnack)
-    response = dog
+    response = newSnack
   }
-
   return response
 }
 
@@ -30,7 +30,6 @@ function getOneSnack (id) {
   let error = ''
   const snack = snacks.find(snack => snack.id === id)
   let response
-
   if (!snack) {
     error = `Could not find snack with id of ${id}`
     response = { error }
@@ -39,3 +38,28 @@ function getOneSnack (id) {
   }
   return response
 }
+
+// Edit A Snacks
+function updateSnack (id, body) {
+  let error = {}
+  const snack = snacks.find(snack => snack.id === id)
+  const snackIndex = snacks.indexOf(snack)
+  const name = body.name
+  let response
+  if (!snack) {
+    error.message = `Could not find snack with id of ${id}`
+    error.status = 404
+    response = { error }
+  } else if (!name) {
+    error.message =  `Name is required`
+    error.status = 400
+    response = { error }
+  } else {
+    snack.name = name
+    snacks[snackIndex] = snack
+    response = { snack }
+  }
+  return response
+}
+
+module.exports = {create, getAll, getOneSnack, updateSnack}

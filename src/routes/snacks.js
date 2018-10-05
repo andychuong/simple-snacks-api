@@ -1,15 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const ctrl = require('../controllers/snacks')
+const control = require('../controllers/snacks')
 
-router.get('/', ctrl.getAll)
-
-router.get('/:id', ctrl.getOneSnack)
-
-router.post('/', ctrl.createSnack)
-
-// router.put('/:id', ctrl.updateSnack)
-
-// router.delete('/:id', ctrl.deleteSnack)
+// http http://localhost:3000/snacks
+router.get('/', control.getAll)
+// http://localhost:3000/snacks/snacks/
+router.get('/:id', control.getOneSnack)
+//http  --json POST http://localhost:3000/snacks name=Chips+Ahoy
+router.post('/', control.createSnack)
+router.put('/:id', control.updateSnack)
+// router.delete('/:id', control.deleteSnack)
 
 module.exports = router
